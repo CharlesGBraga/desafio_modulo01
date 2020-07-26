@@ -11,6 +11,11 @@ let dadosestatistica = document.querySelector('#dadosestatistica');
 let todosUsuarios = [];
 let usuariosFiltrados = [];
 
+let masculino = 0;
+let feminino = 0;
+let idade = 0;
+let mediaIdade = 0.0;
+
 /*Iniciando o JS assim que o HTML esteja carregado*/
 window.addEventListener('load', () => {
   buscaUsuario.addEventListener('keyup', disableInput);
@@ -48,7 +53,6 @@ async function fetchUsers() {
       genero: usuario.gender,
     };
   });
-  // console.log(todosUsuarios);
 }
 
 /* Filtrando e passando o parâmetro para a função render()*/
@@ -60,18 +64,20 @@ const filtroUsuarios = () => {
   );
   usuariosFiltrados.sort((a, b) => a.nome.localeCompare(b.nome));
   render(usuariosFiltrados);
-  // console.log(usuariosFiltrados);
 };
 
+function render(usuariosFiltrados) {
+  renderUsuarios(usuariosFiltrados);
+  renderEstatistica(usuariosFiltrados);
+}
 /* Renderizando a página*/
-function render(usuarios) {
+function renderUsuarios(usuarios) {
   let HTML = '<div>';
   if (usuarios.length >= 1) {
     usuarios.forEach((usuario) => {
       const { nome, imagem, idade } = usuario;
-      // console.log(nome);
-      // console.log(idade);
-      const HTMLTemp = `
+
+      const HTMLUser = `
         <div class='usuario'>
           <div>
             <img src="${imagem}" alt="imagem">
@@ -84,16 +90,45 @@ function render(usuarios) {
           </div>
         </div>
       `;
-      HTML = HTML += HTMLTemp;
+      HTML = HTML += HTMLUser;
+      const HTMLQtd = `<div>${usuarios.length} usuário(s) encontrado(s)</div>`;
+      painelUsuarios.innerHTML = HTMLQtd;
     });
-    // console.log(usuarios);
   } else {
-    const HTMLTemp = `
+    const HTMLUser = `
     <div>
       <h5>Nenhum usuário filtrado</h5>
     </div>`;
 
-    HTML = HTML += HTMLTemp;
+    HTML += HTMLUser;
   }
   dadosUsuarios.innerHTML = HTML;
+}
+
+function renderEstatistica(usuarios) {
+  if (usuarios) {
+    masculino = usuarios.filter((usuario) => {
+      return usuario.genero === 'male';
+    });
+
+    feminino = usuarios.filter((usuario) => {
+      return usuario.genero === 'female';
+    });
+
+    idade = usuarios.reduce((accumulator, current) => {
+      return accumulator + current.idade;
+    }, 0);
+
+    mediaIdade = idade / usuarios.length;
+
+    const HTML = `
+    <div class='estatistica'>
+      <span><strong>Sexo masculino: </strong>${masculino.length}</span><br />
+      <span><strong>Sexo feminino: </strong>${feminino.length}</span><br />
+      <span><strong>Soma das idades: </strong>${idade}</span><br />
+      <span><strong>Média das idades: </strong>${mediaIdade}<span>
+    </div>
+  `;
+    dadosestatistica.innerHTML = HTML;
+  }
 }

@@ -5,12 +5,15 @@ body {
 
 h1 {
   padding-top: 150px;
-  color: rgb(230, 230, 230);
+  color: #fff;
   font-size: 35px;
 }
 
 h5 {
   text-align: center;
+}
+h6 {
+  color: #fff;
 }
 
 img {
