@@ -1,0 +1,33 @@
+TO DO
+
+01 - carregar em array dados da API https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo OK
+02 - Implementar Spin
+03 - Desapilitar o botão quando não houver texto digitado - OK
+04 - Deve retornar pesquisa pressionando Enter ou clicando no botão Pesquisar
+05 - Quadro da esquerda deve conter os usuários: Foto,Nome,Sobrenome e Idade
+06 - Quadro da direita estatísticas: Quantos usuários do sexo masculino, quantos do sexo feminino,
+     Soma das idades e média das idades 
+
+
+  doMap();
+  doFilter();
+
+  //Função MAP - Trazendo do Json apenas nome e e-mail
+  function doMap() {
+    const nomeEmail = people.results.map((person) => {
+      return {
+        name: person.name.first,
+        email: person.email,
+      };
+    });
+    console.log(nomeEmail);
+  }
+
+  // Trazendos apenas aqueles com a idade maior que 50 anos
+  function doFilter() {
+    const age = people.results.filter((person) => {
+      return person.dob.age >= 18;
+    });
+
+    console.log(age);
+  }     

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pesquisa de Usuários</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <!-- <img
+      id="logo"
+      src="https://www.igti.com.br/wp-content/themes/wp-bootstrap-4/assets/images/logos/logo-green.png"
+    /> -->
+    <h1>Pesquisa de Usuários</h1>
+    <div class="Principal">
+      <div id="componentes">
+        <form action="" id="form">
+          <input placeholder="Busca" id="buscaUsuario" type="text" />
+          <button
+            disabled
+            type="submit"
+            class="waves-effect waves-light btn"
+            id="botaoUsuario"
+          >
+            BUSCAR
+          </button>
+        </form>
+
+        <div id="usuarios">
+          <div id="usuarios-pesquisados">
+            <div id="painelUsuarios">Usuários</div>
+            <div id="dadosUsuarios"><h5>Nenhum usuário filtrado</h5></div>
+          </div>
+          <div id="estatisticas">
+            <div id="painelEstatistica">Estatística</div>
+            <div id="dadosestatistica"><h5>Nada a ser exibido</h5></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
